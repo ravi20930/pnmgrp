@@ -1,0 +1,4 @@
+- [x] Create ARMAAN visual token system and responsive launch page
+- [x] Add official ARMAAN project imagery and interactive sections
+- [x] Add metadata, navigation, enquiry/floor-plan/gallery interactions
+- [x] Verify preview at desktop and mobile sizes
