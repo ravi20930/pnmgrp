@@ -334,13 +334,33 @@ function ArmaanPage() {
             const formData = new FormData(event.currentTarget);
             const data = Object.fromEntries(formData.entries()) as Record<string, string>;
             const subject = `Enquiry from ${data['name'] || 'Website'}`;
-            const body = `Name: ${data['name']}\nPhone: ${data['phone']}\nEmail: ${data['email']}\nResidence: ${data['residence'] || 'N/A'}\nMessage: ${data['message']}\n`;
-            window.location.href = `mailto:Armaanbypoonam@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            fetch("https://formsubmit.co/ajax/Armaanbypoonam@gmail.com", {
+              method: "POST",
+              headers: { 
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                  _subject: subject,
+                  name: data['name'],
+                  phone: "+91 " + data['phone'],
+                  email: data['email'],
+                  residence: data['residence'] || 'N/A',
+                  message: data['message']
+              })
+            }).catch(error => console.error(error));
+
             setSubmitted(true);
           }}>
             <label>Name<input name="name" required placeholder="Your full name" /></label>
-            <label>Phone<input name="phone" required type="tel" placeholder="+91 00000 00000" /></label>
-            <label>Email<input name="email" type="email" placeholder="you@email.com" /></label>
+            <label>Phone
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <span style={{ paddingRight: '8px', color: 'inherit' }}>+91</span>
+                <input name="phone" required type="tel" pattern="[0-9]{10}" maxLength={10} placeholder="0000000000" title="Please enter exactly 10 digits" style={{ flex: 1 }} />
+              </div>
+            </label>
+            <label>Email<input name="email" type="email" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" placeholder="you@email.com" title="Please enter a valid email address" /></label>
             <label>Residence
               <select name="residence" defaultValue="">
                 <option value="" disabled>Select a residence</option>
@@ -402,13 +422,33 @@ function FloorPlanModal({ type, onClose }: { type: "2 BHK" | "3 BHK"; onClose: (
               const formData = new FormData(event.currentTarget);
               const data = Object.fromEntries(formData.entries()) as Record<string, string>;
               const subject = `Floor Plan Enquiry from ${data['name'] || 'Website'}`;
-              const body = `Name: ${data['name']}\nPhone: ${data['phone']}\nEmail: ${data['email']}\nResidence: ${data['residence'] || 'N/A'}\nMessage: ${data['message']}\n`;
-              window.location.href = `mailto:Armaanbypoonam@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+              
+              fetch("https://formsubmit.co/ajax/Armaanbypoonam@gmail.com", {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    _subject: subject,
+                    name: data['name'],
+                    phone: "+91 " + data['phone'],
+                    email: data['email'],
+                    residence: data['residence'] || 'N/A',
+                    message: data['message']
+                })
+              }).catch(error => console.error(error));
+
               setSubmitted(true);
            }}>
               <label>Name<input name="name" required placeholder="Your full name" /></label>
-              <label>Phone<input name="phone" required type="tel" placeholder="+91 00000 00000" /></label>
-              <label>Email<input name="email" type="email" placeholder="you@email.com" /></label>
+              <label>Phone
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <span style={{ paddingRight: '8px', color: 'inherit' }}>+91</span>
+                  <input name="phone" required type="tel" pattern="[0-9]{10}" maxLength={10} placeholder="0000000000" title="Please enter exactly 10 digits" style={{ flex: 1 }} />
+                </div>
+              </label>
+              <label>Email<input name="email" type="email" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" placeholder="you@email.com" title="Please enter a valid email address" /></label>
               <label>Residence
                 <select name="residence" defaultValue={type === "2 BHK" ? "2 BHK · 787 sq. ft." : "3 BHK · 1274 sq. ft."}>
                   <option value="" disabled>Select a residence</option>
